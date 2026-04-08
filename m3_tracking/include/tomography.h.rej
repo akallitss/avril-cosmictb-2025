@@ -1,0 +1,24 @@
+--- include/tomography.h
++++ include/tomography.h
+@@ -68,11 +68,11 @@ class Tomography{
+ 		};
+ 		static elec_type str_to_elec(string str);
+ 
+-		static const double ADC_max = 4096;
+-		static const int Nchannel = 64;
+-		static const int Nasic_FEU = 8;
+-		static const int Nasic_Feminos = 4;
+-		static const int Max_Nsample = 512;
++		static constexpr const double ADC_max = 4096;
++		static constexpr const int Nchannel = 64;
++		static constexpr const int Nasic_FEU = 8;
++		static constexpr const int Nasic_Feminos = 4;
++		static constexpr const int Max_Nsample = 512;
+ 		static const string DreamExt;
+ 		static const string FeminosExt;
+ 		//TODO : make this map const
+@@ -200,4 +200,4 @@ namespace Tomography{
+ 	//void process_elec_files(ptree config_tree);
+ }
+ */
+-#endif+#endif

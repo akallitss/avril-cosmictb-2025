@@ -1,0 +1,11 @@
+{
+	"pedrun_name" : "run_ped_",
+	"pedrun_min" : 0,
+	"pedrun_max" : 1,
+	"datarun_name" : "run_data_",
+	"datarun_min" : 0,
+	"datarun_max" : 1,
+	"Ped" : "run_Ped.dat",
+	"RMSPed" : "run_RMSPed.dat",
+	"outTree" : "run_rays.root"
+}

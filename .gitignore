@@ -1,0 +1,51 @@
+# ── Large data files ──────────────────────────────────────────────────────────
+*.root
+*.fdf
+*.dat
+*.aux
+*.thr.aux
+
+# ── Compiled objects and libraries ────────────────────────────────────────────
+*.o
+*.so
+*.a
+*.d
+*.pcm
+*.rdict
+
+# ── ROOT auto-generated files ──────────────────────────────────────────────────
+*.so.dSYM/
+*_cxx.so
+*_cxx.d
+*_cxx_ACLiC_dict*
+*.C.so
+*.C.d
+
+# ── Build artefacts ────────────────────────────────────────────────────────────
+*.exe
+*.out
+core
+core.*
+
+# ── Compiled binaries (project-specific) ──────────────────────────────────────
+CodeDamienNew/DreamDataReader
+m3_tracking/obj/
+
+# ── Logs and temporaries ───────────────────────────────────────────────────────
+*.log
+*.tmp
+*~
+\#*\#
+.DS_Store
+
+# ── Editor / IDE files ────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+m3_tracking/tracking
+m3_tracking/wrapper
+m3_tracking/AutoAlign
+m3_tracking/DataReader
+m3_tracking/carac_all
+m3_tracking/MultiCluster

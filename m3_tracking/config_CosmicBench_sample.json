@@ -1,0 +1,195 @@
+{
+	// every distance is in mm
+	"Nsample" : 32, //Number of sample
+	"XY_size" : 500, //Total plane size
+	"SampleMin" : 5, //Min sample used in clustering
+	"SampleMax" : 21, //Max sample used in clustering
+	"sigma" : 4, //significance needed for the signal to be considered in clustering
+	"TOTCut" : 3, //signal min TOT to be considered in clustering
+	"noise_RMS" : 4096, //channel with noise RMS greater than this value will be treated differently during clustering
+	"first_down_layer" : 2
+	"chisquare_threshold" : 100, //quality cut of tracks
+	"live_graphic_display" : true, //set true if you want the plot to be updated during processing, if false, the plot will only be shown at the end of the process
+	"batch" : false, //set true if you don't want any graphic display
+	"metadata" : "test", //base name of some ouput files (images, config, etc), leave blank to disable these outputs
+	"thread_number" : 4, //set maximum worker thread number for MT computation
+	"electronic_type" : "dream", // must be "feminos" or "dream"
+	"max_file_size" : "1073743748", //maximum size of 1 data file (used for live display)
+	"data_file_basename" : "root_files/Cos_Run4Absorption_4MG2Dv1_141212_17H44_", //must not contain the n° of the file in the run
+	"data_file_first" : 76,
+	"data_file_last" : 76,
+	"max_event" : -1, // if negative, process all event
+	"Tree" : "root_files/test_analyse.root", // analysis tree conaining cluster data
+	"signal_file" : "root_files/test_signal.root", // signal tree containing ADC values for each strip and each sample
+	"RMSPed" : "root_files/test_RMSPed.dat", // RMS of the noise for each strip
+	"Ped" : "root_files/test_Ped.dat", // mean value of the noise for each strip
+	"FEU": //only needed for DREAM electronic, inform of the conversion between id (present in DREAM packet) and n (present in the fdf file name)
+	[
+		{
+			"id" : 0,
+			"n" : 1,
+			"dream_mask": [ 0,1,2,3,4,5,6,7 ] //adapt to file format : only DREAMS in this array must be present in fdf file 
+		}
+	],
+	"CosmicBench":{
+		"CM": // Cosmultis caracs
+		[
+
+		],
+		"MG": // Multigen caracs
+		[
+			{
+				"mg_n": 0, // number of the detector in signal and analysis tree
+				"2D_perp_n": 1, // number of the detector which measure the perpendicular coordinate of this detector (put a negative number for 1D detectors)
+				"z": 1270, // altitude of the detector
+				"is_X" : false, // true if this detector is measuring the X coordinate, false if he measure the Y one
+				"layer": 0, // layer number in the direction of propagation of muons
+				"is_ref" : true, //true if this detector can be used for tracking
+				"offset": 0.27, //translation alignement value, in the direction of the measured coordinate
+				"direction": true, //switch to false if the detector is upside down
+				"angle_z": 0, // angle (rad) alignement value in XY plane
+				"angle_x": 0, // angle (rad) alignement value in YZ plane
+				"angle_y": 0, // angle (rad) alignement value in XZ plane
+				"ClusTOTCut_Min": 3, // minimum cut for Clus TOT
+				"ClusMaxSampleCut_Min": 7, // minimum cut for ClusMaxSample
+				"ClusMaxSampleCut_Max": 26, // maximum cut for ClusMaxSample
+				"ClusSizeCut_Min": 3, // minimum cut for Clus Size
+				"clustering_holes": 0, // maximal number of strip without signal allowed in a cluster
+				"asic_n": 4 // number of the asic the detector was connected to
+			},
+			{
+				"mg_n": 1,
+				"2D_perp_n": 0,
+				"z": 1270,
+				"is_X" : true,
+				"layer": 0,
+				"is_ref" : true,
+				"offset": 0.13,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"clustering_holes": 0,
+				"asic_n": 5
+			},
+			{
+				"mg_n": 2,
+				"2D_perp_n": 3,
+				"z": 1155,
+				"is_X" : false,
+				"layer": 1,
+				"is_ref" : true,
+				"offset": 0.48,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"clustering_holes": 0,
+				"asic_n": 3
+			},
+			{
+				"mg_n": 3,
+				"2D_perp_n": 2,
+				"z": 1155,
+				"is_X" : true,
+				"layer": 1,
+				"is_ref" : true,
+				"offset": 0.03,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"clustering_holes": 0,
+				"asic_n": 0
+			},
+			{
+				"mg_n": 4,
+				"2D_perp_n": 5,
+				"z": 115,
+				"is_X" : false,
+				"layer": 2,
+				"is_ref" : false,
+				"offset": -0.63,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"clustering_holes": 0,
+				"asic_n": 1
+			},
+			{
+				"mg_n": 5,
+				"2D_perp_n": 4,
+				"z": 115,
+				"is_X" : true,
+				"layer": 2,
+				"is_ref" : false,
+				"offset": 0.82,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"clustering_holes": 0,
+				"asic_n": 2
+			},
+			{
+				"mg_n": 6,
+				"2D_perp_n": 7,
+				"z": 0,
+				"is_X" : false,
+				"layer": 3,
+				"is_ref" : true,
+				"offset": 0,
+				"direction": true,
+				"angle_z": -0.00861,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"clustering_holes": 0,
+				"asic_n": 6
+			},
+			{
+				"mg_n": 7,
+				"2D_perp_n": 6,
+				"z": 0,
+				"is_X" : true,
+				"layer": 3,
+				"is_ref" : true,
+				"offset": 0,
+				"direction": true,
+				"angle_z": 0.00846,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"clustering_holes": 0,
+				"asic_n": 7
+			}
+		]
+	}
+}

@@ -1,0 +1,224 @@
+ObjSuf        = o
+SrcSuf        = cxx
+ExeSuf        =
+DllSuf        = so
+
+OutPutOpt     = -o
+
+MYINCLUDE     = ~/.
+MYLIB         = $(PPATH)/lib
+OUTPUTDIR     = ./
+ROOTCFLAGS    = $(shell root-config --cflags)
+ROOTLIBS      = $(shell root-config --libs) -lMinuit
+ROOTGLIBS     = $(shell root-config --glibs) -lMinuit
+
+
+
+# Linux with egcs
+CXX           = g++
+CXXFLAGS      = -g -O -Wall -Wno-deprecated -fno-exceptions -fPIC $(ROOTCFLAGS) -I$(MYINCLUDE) 
+LD            = g++
+LIBS          = $(ROOTLIBS) -lNetx -lm -ldl -rdynamic
+# GLIBS         = $(ROOTGLIBS) -L/usr/local/root/xrootd/xrootd-3.2.0/lib64 -Wl,-rpath,/usr/local/root/xrootd/xrootd-3.2.0/lib64  -lXrdUtils -lXrdClient -L/usr/lib64 -L$(MYLIB) -lXpm -lX11 -lm -ldl -rdynamic -lpthread
+# GLIBS         = $(ROOTGLIBS) -L/afs/in2p3.fr/system/amd64_sl5/usr/local/root/xrootd/xrootd-3.2.0/lib64 -Wl,-rpath,/afs/in2p3.fr/system/amd64_sl5/usr/local/root/xrootd/xrootd-3.2.0/lib64  -lXrdUtils -lXrdClient -L/usr/lib64 -L$(MYLIB) -lXpm -lX11 -lm -ldl -rdynamic -lpthread
+GLIBS         = $(ROOTGLIBS) -L/usr/local/products/xrootd/root/3.3.2/lib64 -Wl,-rpath,/usr/local/products/xrootd/root/3.3.2/lib64   -L/usr/lib64 -L$(MYLIB) -lXpm -lX11 -lm -ldl -rdynamic -lpthread
+LDFLAGS       =  $(GLIBS) 
+SOFLAGS       = -shared
+
+#------------------------------------------------------------------------------
+
+all:    DreamDataReader
+
+lib:    libEvents.so
+
+
+clean:
+	@rm -f $(OBJS) *Dict.* *dict* core *.o StartAnalysis T2KDataReader DreamDataReader StagingFile Staging
+
+.SUFFIXES: .$(SrcSuf)
+
+.$(SrcSuf).$(ObjSuf):
+	$(CXX) $(CXXFLAGS) -c $< 
+
+.o:
+	$(LD) $< -o $(OUTPUTDIR)$* $(LDFLAGS)
+
+
+StartAnalysis:  StartAnalysis.o Events.o MyMappage.o PixelMMDecoding.o MyDict.o
+	$(LD) $^ -o StartAnalysis $(LDFLAGS) -lMatrix
+
+MyDict.cxx: Events.h Linkdef.h
+	rootcint -f $@ -c $(CXXFLAGS) -p $^
+
+libEvents.so: Events.o MyDict.o
+	$(CXX) -shared -o $@ $< MyDict.o
+
+
+
+
+
+
+
+
+# DO NOT DELETE
+
+DreamDataReader.o: /usr/include/stdio.h /usr/include/features.h
+DreamDataReader.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+DreamDataReader.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+DreamDataReader.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+DreamDataReader.o: /usr/include/libio.h /usr/include/_G_config.h
+DreamDataReader.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+DreamDataReader.o: /usr/include/bits/sys_errlist.h /usr/include/stdint.h
+DreamDataReader.o: /usr/include/bits/wchar.h /usr/include/stdlib.h
+DreamDataReader.o: /usr/include/bits/waitflags.h
+DreamDataReader.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+DreamDataReader.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+DreamDataReader.o: /usr/include/sys/types.h /usr/include/time.h
+DreamDataReader.o: /usr/include/sys/select.h /usr/include/bits/select.h
+DreamDataReader.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+DreamDataReader.o: /usr/include/sys/sysmacros.h
+DreamDataReader.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+DreamDataReader.o: /usr/include/arpa/inet.h /usr/include/netinet/in.h
+DreamDataReader.o: /usr/include/sys/socket.h /usr/include/sys/uio.h
+DreamDataReader.o: /usr/include/bits/uio.h /usr/include/bits/socket.h
+DreamDataReader.o: /usr/include/bits/sockaddr.h /usr/include/asm/socket.h
+DreamDataReader.o: /usr/include/asm-generic/socket.h
+DreamDataReader.o: /usr/include/asm/sockios.h
+DreamDataReader.o: /usr/include/asm-generic/sockios.h /usr/include/bits/in.h
+DreamDataReader.o: /usr/include/string.h /usr/include/xlocale.h
+DreamDataReader.o: /usr/include/signal.h /usr/include/bits/signum.h
+DreamDataReader.o: /usr/include/bits/siginfo.h /usr/include/bits/sigaction.h
+DreamDataReader.o: /usr/include/bits/sigcontext.h
+DreamDataReader.o: /usr/include/bits/sigstack.h /usr/include/sys/ucontext.h
+DreamDataReader.o: /usr/include/bits/sigthread.h dreamdataline.h FeuReadOut.h
+Events.o: Events.h /usr/include/stdlib.h /usr/include/features.h
+Events.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+Events.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+Events.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+Events.o: /usr/include/endian.h /usr/include/bits/endian.h
+Events.o: /usr/include/bits/byteswap.h /usr/include/sys/types.h
+Events.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+Events.o: /usr/include/time.h /usr/include/sys/select.h
+Events.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+Events.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+Events.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+Events.o: PixelMMDecoding.h /usr/include/stdio.h /usr/include/libio.h
+Events.o: /usr/include/_G_config.h /usr/include/wchar.h
+Events.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+Events.o: /usr/include/math.h /usr/include/bits/huge_val.h
+Events.o: /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h
+Events.o: /usr/include/bits/inf.h /usr/include/bits/nan.h
+Events.o: /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h
+MyDict.o: MyDict.h /usr/include/stdio.h /usr/include/features.h
+MyDict.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+MyDict.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+MyDict.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+MyDict.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+MyDict.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+MyDict.o: /usr/include/stdlib.h /usr/include/bits/waitflags.h
+MyDict.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+MyDict.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+MyDict.o: /usr/include/sys/types.h /usr/include/time.h
+MyDict.o: /usr/include/sys/select.h /usr/include/bits/select.h
+MyDict.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+MyDict.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+MyDict.o: /usr/include/alloca.h /usr/include/math.h
+MyDict.o: /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h
+MyDict.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+MyDict.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+MyDict.o: /usr/include/bits/mathcalls.h /usr/include/string.h
+MyDict.o: /usr/include/xlocale.h Events.h PixelMMDecoding.h
+MyMappage.o: MyMappage.h
+PixelMMDecoding.o: /usr/include/math.h /usr/include/features.h
+PixelMMDecoding.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+PixelMMDecoding.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+PixelMMDecoding.o: /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h
+PixelMMDecoding.o: /usr/include/bits/huge_vall.h /usr/include/bits/inf.h
+PixelMMDecoding.o: /usr/include/bits/nan.h /usr/include/bits/mathdef.h
+PixelMMDecoding.o: /usr/include/bits/mathcalls.h /usr/include/stdlib.h
+PixelMMDecoding.o: /usr/include/bits/waitflags.h
+PixelMMDecoding.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+PixelMMDecoding.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+PixelMMDecoding.o: /usr/include/sys/types.h /usr/include/bits/types.h
+PixelMMDecoding.o: /usr/include/bits/typesizes.h /usr/include/time.h
+PixelMMDecoding.o: /usr/include/sys/select.h /usr/include/bits/select.h
+PixelMMDecoding.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+PixelMMDecoding.o: /usr/include/sys/sysmacros.h
+PixelMMDecoding.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+PixelMMDecoding.o: PixelMMDecoding.h /usr/include/stdio.h
+PixelMMDecoding.o: /usr/include/libio.h /usr/include/_G_config.h
+PixelMMDecoding.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+PixelMMDecoding.o: /usr/include/bits/sys_errlist.h
+Staging.o: /usr/include/stdio.h /usr/include/features.h
+Staging.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+Staging.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+Staging.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+Staging.o: /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h
+Staging.o: /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h
+Staging.o: /usr/include/stdlib.h /usr/include/bits/waitflags.h
+Staging.o: /usr/include/bits/waitstatus.h /usr/include/endian.h
+Staging.o: /usr/include/bits/endian.h /usr/include/bits/byteswap.h
+Staging.o: /usr/include/sys/types.h /usr/include/time.h
+Staging.o: /usr/include/sys/select.h /usr/include/bits/select.h
+Staging.o: /usr/include/bits/sigset.h /usr/include/bits/time.h
+Staging.o: /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h
+Staging.o: /usr/include/alloca.h
+StagingFile.o: /usr/include/stdio.h /usr/include/features.h
+StagingFile.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+StagingFile.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+StagingFile.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+StagingFile.o: /usr/include/libio.h /usr/include/_G_config.h
+StagingFile.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+StagingFile.o: /usr/include/bits/sys_errlist.h /usr/include/stdlib.h
+StagingFile.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+StagingFile.o: /usr/include/endian.h /usr/include/bits/endian.h
+StagingFile.o: /usr/include/bits/byteswap.h /usr/include/sys/types.h
+StagingFile.o: /usr/include/time.h /usr/include/sys/select.h
+StagingFile.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+StagingFile.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+StagingFile.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+StartAnalysis.o: /usr/include/stdio.h /usr/include/features.h
+StartAnalysis.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+StartAnalysis.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+StartAnalysis.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+StartAnalysis.o: /usr/include/libio.h /usr/include/_G_config.h
+StartAnalysis.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+StartAnalysis.o: /usr/include/bits/sys_errlist.h /usr/include/stdint.h
+StartAnalysis.o: /usr/include/bits/wchar.h /usr/include/stdlib.h
+StartAnalysis.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+StartAnalysis.o: /usr/include/endian.h /usr/include/bits/endian.h
+StartAnalysis.o: /usr/include/bits/byteswap.h /usr/include/sys/types.h
+StartAnalysis.o: /usr/include/time.h /usr/include/sys/select.h
+StartAnalysis.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+StartAnalysis.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+StartAnalysis.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+StartAnalysis.o: /usr/include/arpa/inet.h /usr/include/netinet/in.h
+StartAnalysis.o: /usr/include/sys/socket.h /usr/include/sys/uio.h
+StartAnalysis.o: /usr/include/bits/uio.h /usr/include/bits/socket.h
+StartAnalysis.o: /usr/include/bits/sockaddr.h /usr/include/asm/socket.h
+StartAnalysis.o: /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h
+StartAnalysis.o: /usr/include/asm-generic/sockios.h /usr/include/bits/in.h
+StartAnalysis.o: mygblink.h /usr/include/string.h /usr/include/xlocale.h
+StartAnalysis.o: Events.h PixelMMDecoding.h
+T2KDataReader.o: /usr/include/stdio.h /usr/include/features.h
+T2KDataReader.o: /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h
+T2KDataReader.o: /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h
+T2KDataReader.o: /usr/include/bits/types.h /usr/include/bits/typesizes.h
+T2KDataReader.o: /usr/include/libio.h /usr/include/_G_config.h
+T2KDataReader.o: /usr/include/wchar.h /usr/include/bits/stdio_lim.h
+T2KDataReader.o: /usr/include/bits/sys_errlist.h /usr/include/stdint.h
+T2KDataReader.o: /usr/include/bits/wchar.h /usr/include/stdlib.h
+T2KDataReader.o: /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h
+T2KDataReader.o: /usr/include/endian.h /usr/include/bits/endian.h
+T2KDataReader.o: /usr/include/bits/byteswap.h /usr/include/sys/types.h
+T2KDataReader.o: /usr/include/time.h /usr/include/sys/select.h
+T2KDataReader.o: /usr/include/bits/select.h /usr/include/bits/sigset.h
+T2KDataReader.o: /usr/include/bits/time.h /usr/include/sys/sysmacros.h
+T2KDataReader.o: /usr/include/bits/pthreadtypes.h /usr/include/alloca.h
+T2KDataReader.o: /usr/include/arpa/inet.h /usr/include/netinet/in.h
+T2KDataReader.o: /usr/include/sys/socket.h /usr/include/sys/uio.h
+T2KDataReader.o: /usr/include/bits/uio.h /usr/include/bits/socket.h
+T2KDataReader.o: /usr/include/bits/sockaddr.h /usr/include/asm/socket.h
+T2KDataReader.o: /usr/include/asm-generic/socket.h /usr/include/asm/sockios.h
+T2KDataReader.o: /usr/include/asm-generic/sockios.h /usr/include/bits/in.h
+T2KDataReader.o: mygblink.h /usr/include/string.h /usr/include/xlocale.h

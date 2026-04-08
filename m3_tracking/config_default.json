@@ -1,0 +1,233 @@
+{
+	// every distance is in mm
+	"electronic_type" : "dream", // must be "feminos" or "dream"
+	"max_file_size" : "1073743748", //maximum size of 1 data file (used for live display)
+	"data_file_basename" : "dumb_", //must not contain the n° of the file in the run
+	"data_file_first" : 0,
+	"data_file_last" : 100,
+	"max_event" : -1, // if negative, process all event
+	"Tree" : "dumb_analyse.root", // analysis tree conaining cluster data
+	"signal_file" : "dumb_signal.root", // signal tree containing ADC values for each strip and each sample
+	"RMSPed" : "dumb_RMSPed.dat", // RMS of the noise for each strip
+	"Ped" : "dumb_Ped.dat", // mean value of the noise for each strip
+	"use_SRF" : false, // use Strip Response Function for clustering (kind of deprecated : leave "false" if you don't know what to do)
+	"total_CM_N" : 0, // total number of CosMultis used for the run (used to crosscheck)
+	"total_MG_N" : 8, // total number of Multigens used for the run (used to crosscheck)
+	"CosmicBench":{
+		"CM": // Cosmultis caracs
+		[
+
+		],
+		"MG": // Multigen caracs
+		[
+			{
+				"mg_n": 0, // number of the detector in signal and analysis tree
+				"2D_perp_n": 1, // number of the detector which measure the perpendicular coordinate of this detector (put a negative number for 1D detectors)
+				"z": 1277.9, // altitude of the detector
+				"is_X" : false, // true if this detector is measuring the X coordinate, false if he measure the Y one
+				"is_up": true, // true if this detector is above the deviation tomography scanned volume
+				"is_ref" : true, //true if this detector can be used for tracking
+				"offset": 0.27, //translation alignement value, in the direction of the measured coordinate
+				"direction": true, //switch to false if the detector is upside down
+				"angle_z": 0, // angle (rad) alignement value in XY plane
+				"angle_x": 0, // angle (rad) alignement value in YZ plane
+				"angle_y": 0, // angle (rad) alignement value in XZ plane
+				"ClusTOTCut_Min": 3, // minimum cut for Clus TOT
+				"ClusMaxSampleCut_Min": 7, // minimum cut for ClusMaxSample
+				"ClusMaxSampleCut_Max": 26, // maximum cut for ClusMaxSample
+				"ClusSizeCut_Min": 3, // minimum cut for Clus Size
+				"SRF": // Strip Response function caracteristics (kind of deprecated) : (offset + ((1-ratio)*gaussian(x,gauss)/(ratio*lorentzian(x,lorentz)))/(1+offset)
+				{
+					"offset": 0.116671,
+					"gauss": 0.704171,
+					"lorentz": 3.30772,
+					"ratio": 0.996261
+				},
+				"clustering_holes": 1, // maximal number of strip without signal allowed in a cluster
+				"asic_n": 96 // number of the asic the detector was connected to
+			},
+			{
+				"mg_n": 1,
+				"2D_perp_n": 0,
+				"z": 1277.9,
+				"is_X" : true,
+				"is_up": true,
+				"is_ref" : true,
+				"offset": 0.13,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"SRF":
+				{
+					"offset": 0.0894346,
+					"gauss": 0.273847,
+					"lorentz": 2.51475,
+					"ratio": 0.982658
+				},
+				"clustering_holes": 0,
+				"asic_n": 97
+			},
+			{
+				"mg_n": 2,
+				"2D_perp_n": 3,
+				"z": 1161.5,
+				"is_X" : false,
+				"is_up": true,
+				"is_ref" : true,
+				"offset": 0.48,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"SRF":
+				{
+					"offset": 0.162069,
+					"gauss": 0.762977,
+					"lorentz": 4.0527,
+					"ratio": 0.99394
+				},
+				"clustering_holes": 1,
+				"asic_n": 98
+			},
+			{
+				"mg_n": 3,
+				"2D_perp_n": 2,
+				"z": 1161.5,
+				"is_X" : true,
+				"is_up": true,
+				"is_ref" : true,
+				"offset": 0.03,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"SRF":
+				{
+					"offset": 0.0705705,
+					"gauss": 0.769743,
+					"lorentz": 2.09386,
+					"ratio": 0.877587
+				},
+				"clustering_holes": 0,
+				"asic_n": 99
+			},
+			{
+				"mg_n": 4,
+				"2D_perp_n": 5,
+				"z": 115.65,
+				"is_X" : false,
+				"is_up": false,
+				"is_ref" : true,
+				"offset": -0.63,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"SRF":
+				{
+					"offset": 0.259024,
+					"gauss": 1.76264,
+					"lorentz": 3.72808,
+					"ratio": 0.942179
+				},
+				"clustering_holes": 1,
+				"asic_n": 100
+			},
+			{
+				"mg_n": 5,
+				"2D_perp_n": 4,
+				"z": 115.65,
+				"is_X" : true,
+				"is_up": false,
+				"is_ref" : true,
+				"offset": 0.82,
+				"direction": true,
+				"angle_z": 0,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"SRF":
+				{
+					"offset": 0.115348,
+					"gauss": 0.55603,
+					"lorentz": 2.24473,
+					"ratio": 0.943647
+				},
+				"clustering_holes": 0,
+				"asic_n": 101
+			},
+			{
+				"mg_n": 6,
+				"2D_perp_n": 7,
+				"z": 0,
+				"is_X" : false,
+				"is_up": false,
+				"is_ref" : true,
+				"offset": 0,
+				"direction": true,
+				"angle_z": -0.00861,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 3,
+				"SRF":
+				{
+					"offset": 0.124388,
+					"gauss": 0.049117,
+					"lorentz": 4.12641,
+					"ratio": 0.999976
+				},
+				"clustering_holes": 1,
+				"asic_n": 102
+			},
+			{
+				"mg_n": 7,
+				"2D_perp_n": 6,
+				"z": 0,
+				"is_X" : true,
+				"is_up": false,
+				"is_ref" : true,
+				"offset": 0,
+				"direction": true,
+				"angle_z": 0.00846,
+				"angle_x": 0,
+				"angle_y": 0,
+				"ClusTOTCut_Min": 3,
+				"ClusMaxSampleCut_Min": 7,
+				"ClusMaxSampleCut_Max": 26,
+				"ClusSizeCut_Min": 2,
+				"SRF":
+				{
+					"offset": 0.132331,
+					"gauss": 1.07635,
+					"lorentz": 2.27167,
+					"ratio": 0.742001
+				},
+				"clustering_holes": 0,
+				"asic_n": 103
+			}
+		]
+	}
+}

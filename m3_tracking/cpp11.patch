@@ -1,0 +1,98 @@
+diff --git a/include/detector.h b/include/detector.h
+index 7b1b6aa..65159fc 100644
+--- a/include/detector.h
++++ b/include/detector.h
+@@ -90,13 +90,13 @@ class CM_Detector: public Detector{
+ 		~CM_Detector();
+ 		Detector * build_det(const ptree::value_type& child) const;
+ 		//CosMulti general charac
+-		static const double thinStripPitch = 500./1024.; // distance between the middle of 2 adjacent thin strips
+-		static const double wideStripPitch = 500./32.; // distance between the middle of 2 adjacent wide strips
+-		static const int Nchannel = 64;
+-		static const int Nstrip = 1024;
+-		static const double size = 500.;
+-		static const int CMN_div = 2;
+-		static const int MaxNClus = 600;
++		static constexpr const double thinStripPitch = 500./1024.; // distance between the middle of 2 adjacent thin strips
++		static constexpr const double wideStripPitch = 500./32.; // distance between the middle of 2 adjacent wide strips
++		static constexpr const int Nchannel = 64;
++		static constexpr const int Nstrip = 1024;
++		static constexpr const double size = 500.;
++		static constexpr const int CMN_div = 2;
++		static constexpr const int MaxNClus = 600;
+ 		unsigned int StripToChannel(unsigned int i) const;
+ 		double get_size() const;
+ 		int get_Nchannel() const;
+@@ -144,12 +144,12 @@ class MG_Detector: public Detector{
+ 		static const vector<unsigned int> StripToChannel_a;
+ 		static vector<unsigned int> ChannelToStrip(unsigned int channel_nb);
+ 		//MultiGen general charac
+-		static const double StripPitch = 500./1024.; // distance between the middle of 2 adjacent strips
+-		static const int Nchannel = 61;
+-		static const int Nstrip = 1024;
+-		static const double size = 500.;
+-		static const int CMN_div = 2;
+-		static const int MaxNClus = 300;
++		static constexpr const double StripPitch = 500./1024.; // distance between the middle of 2 adjacent strips
++		static constexpr const int Nchannel = 61;
++		static constexpr const int Nstrip = 1024;
++		static constexpr const double size = 500.;
++		static constexpr const int CMN_div = 2;
++		static constexpr const int MaxNClus = 300;
+ 		double get_size() const;
+ 		int get_Nchannel() const;
+ 		int get_Nstrip() const;
+@@ -200,12 +200,12 @@ class MGv2_Detector: public Detector{
+ 		static const vector<unsigned int> StripToChannel_a;
+ 		static vector<unsigned int> ChannelToStrip(unsigned int channel_nb);
+ 		//MultiGen general charac
+-		static const double StripPitch = 500./1037.; // distance between the middle of 2 adjacent strips
+-		static const int Nchannel = 61;
+-		static const int Nstrip = 1037;
+-		static const double size = 500.;
+-		static const int CMN_div = 2;
+-		static const int MaxNClus = 300;
++		static constexpr const double StripPitch = 500./1037.; // distance between the middle of 2 adjacent strips
++		static constexpr const int Nchannel = 61;
++		static constexpr const int Nstrip = 1037;
++		static constexpr const double size = 500.;
++		static constexpr const int CMN_div = 2;
++		static constexpr const int MaxNClus = 300;
+ 		double get_size() const;
+ 		int get_Nchannel() const;
+ 		int get_Nstrip() const;
+@@ -270,4 +270,4 @@ class CosmicBench{
+ bool operator==(Detector const &det1, Detector const &det2);
+ bool operator!=(Detector const &det1, Detector const &det2);
+ 
+-#endif
+\ No newline at end of file
++#endif
+diff --git a/include/tomography.h b/include/tomography.h
+index 9fe40b9..0b63520 100644
+--- a/include/tomography.h
++++ b/include/tomography.h
+@@ -68,11 +68,11 @@ class Tomography{
+ 		};
+ 		static elec_type str_to_elec(string str);
+ 
+-		static const double ADC_max = 4096;
+-		static const int Nchannel = 64;
+-		static const int Nasic_FEU = 8;
+-		static const int Nasic_Feminos = 4;
+-		static const int Max_Nsample = 512;
++		static constexpr const double ADC_max = 4096;
++		static constexpr const int Nchannel = 64;
++		static constexpr const int Nasic_FEU = 8;
++		static constexpr const int Nasic_Feminos = 4;
++		static constexpr const int Max_Nsample = 512;
+ 		static const string DreamExt;
+ 		static const string FeminosExt;
+ 		//TODO : make this map const
+@@ -200,4 +200,4 @@ namespace Tomography{
+ 	//void process_elec_files(ptree config_tree);
+ }
+ */
+-#endif
+\ No newline at end of file
++#endif
